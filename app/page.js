@@ -1,1 +1,1 @@
-export { default } from './BodyTypeGame';
+export { default } from 'BodyTypeGame';
