@@ -1,5 +1,8 @@
-
 import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import Image from "next/image";
 
 const bodyTypes = [
@@ -40,59 +43,80 @@ function getBodyType(bust, waist, hips) {
   return bodyTypes[1];
 }
 
-export default function Home() {
+export default function BodyTypeGame() {
   const [bust, setBust] = useState(0);
   const [waist, setWaist] = useState(0);
   const [hips, setHips] = useState(0);
   const [result, setResult] = useState(null);
+  const [useInches, setUseInches] = useState(false);
+
+  const convertToCm = (value) => useInches ? value * 2.54 : value;
 
   const handleSubmit = () => {
-    const bodyType = getBodyType(bust, waist, hips);
+    const bodyType = getBodyType(
+      convertToCm(bust),
+      convertToCm(waist),
+      convertToCm(hips)
+    );
     setResult(bodyType);
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', padding: 20 }}>
-      <h1 style={{ fontSize: 24, fontWeight: 'bold', textAlign: 'center' }}>
-        You, Beautifully You 💖
-      </h1>
-      <div style={{ marginTop: 20 }}>
-        <input
-          type="number"
-          placeholder="Bust (in cm)"
-          onChange={(e) => setBust(Number(e.target.value))}
-          style={{ width: '100%', padding: 8, marginBottom: 10 }}
-        />
-        <input
-          type="number"
-          placeholder="Waist (in cm)"
-          onChange={(e) => setWaist(Number(e.target.value))}
-          style={{ width: '100%', padding: 8, marginBottom: 10 }}
-        />
-        <input
-          type="number"
-          placeholder="Hips (in cm)"
-          onChange={(e) => setHips(Number(e.target.value))}
-          style={{ width: '100%', padding: 8, marginBottom: 10 }}
-        />
-        <button onClick={handleSubmit} style={{ width: '100%', padding: 10, backgroundColor: '#f472b6', color: 'white', border: 'none', borderRadius: 5 }}>
-          See Your Body Type
-        </button>
+    <div className="max-w-md mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-4 text-center">You, Beautifully You 💖</h1>
+
+      <p className="text-center mb-6 text-base text-muted-foreground">
+        Every body is a good body. This space is made for you to feel confident,
+        celebrated, and understood. Let's discover how unique and beautiful you
+        already are – just as you are. 💕
+      </p>
+
+      <div className="flex items-center justify-end mb-2">
+        <span className="text-sm mr-2">Use Inches</span>
+        <Switch checked={useInches} onCheckedChange={setUseInches} />
       </div>
 
-      {result && (
-        <div style={{ marginTop: 30, textAlign: 'center' }}>
-          <Image
-            src={result.image}
-            alt={`${result.name} avatar`}
-            width={200}
-            height={200}
+      <Card className="mb-4">
+        <CardContent className="space-y-4 pt-6">
+          <Input
+            type="number"
+            placeholder={`Bust (in ${useInches ? "inches" : "cm"})`}
+            onChange={(e) => setBust(Number(e.target.value))}
           />
-          <div style={{ fontSize: 32, marginTop: 10 }}>{result.shape}</div>
-          <h2 style={{ fontSize: 20, fontWeight: 'bold' }}>{result.name}</h2>
-          <p>{result.message}</p>
-          <p style={{ fontStyle: 'italic', marginTop: 10 }}>Style Tip: {result.styleTips}</p>
-        </div>
+          <Input
+            type="number"
+            placeholder={`Waist (in ${useInches ? "inches" : "cm"})`}
+            onChange={(e) => setWaist(Number(e.target.value))}
+          />
+          <Input
+            type="number"
+            placeholder={`Hips (in ${useInches ? "inches" : "cm"})`}
+            onChange={(e) => setHips(Number(e.target.value))}
+          />
+          <Button className="w-full" onClick={handleSubmit}>
+            See Your Body Type
+          </Button>
+        </CardContent>
+      </Card>
+
+      {result && (
+        <Card>
+          <CardContent className="text-center pt-6">
+            <Image
+              src={result.image}
+              alt={`${result.name} avatar`}
+              width={200}
+              height={200}
+              className="mx-auto mb-4 rounded-xl shadow"
+            />
+            <div className="text-4xl mb-2">{result.shape}</div>
+            <div className="text-xl font-semibold">{result.name}</div>
+            <p className="text-base mt-2">{result.message}</p>
+            <p className="text-sm mt-4 text-muted-foreground italic">
+              Style Tip: {result.styleTips}
+            </p>
+          </CardContent>
+        </Card>
       )}
     </div>
   );
