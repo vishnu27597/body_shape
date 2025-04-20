@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
+import { Card, CardContent } from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
+import { Switch } from "../components/ui/switch";
 import Image from "next/image";
 
 const bodyTypes = [
@@ -12,29 +12,33 @@ const bodyTypes = [
     name: "Sunshine",
     message: "Radiant and full of warmth!",
     shape: "🌞",
-    styleTips: "Flowy dresses, A-line skirts, and bright colors highlight your beautiful curves. Embrace bold prints and comfy fits!",
-    image: "/avatars/sunshine.png"
+    styleTips:
+      "Flowy dresses, A-line skirts, and bright colors highlight your beautiful curves. Embrace bold prints and comfy fits!",
+    image: "/avatars/sunshine.png",
   },
   {
     name: "Grace",
     message: "Elegant and poised.",
     shape: "💃",
-    styleTips: "Wrap dresses, high-waisted pants, and soft fabrics enhance your natural elegance. Go for soft pastels or florals.",
-    image: "/avatars/grace.png"
+    styleTips:
+      "Wrap dresses, high-waisted pants, and soft fabrics enhance your natural elegance. Go for soft pastels or florals.",
+    image: "/avatars/grace.png",
   },
   {
     name: "Power",
     message: "Strong and confident!",
     shape: "🏋️‍♀️",
-    styleTips: "Structured jackets, bold colors, and fitted jeans reflect your power. Try statement accessories and sleek cuts.",
-    image: "/avatars/power.png"
+    styleTips:
+      "Structured jackets, bold colors, and fitted jeans reflect your power. Try statement accessories and sleek cuts.",
+    image: "/avatars/power.png",
   },
   {
     name: "Glow",
     message: "Bright, bold, and beautiful.",
     shape: "🌟",
-    styleTips: "Layered looks, comfy oversized tops, and colorful sneakers match your vibrant personality. Mix patterns with confidence!",
-    image: "/avatars/glow.png"
+    styleTips:
+      "Layered looks, comfy oversized tops, and colorful sneakers match your vibrant personality. Mix patterns with confidence!",
+    image: "/avatars/glow.png",
   },
 ];
 
@@ -52,7 +56,7 @@ export default function BodyTypeGame() {
   const [result, setResult] = useState(null);
   const [useInches, setUseInches] = useState(false);
 
-  const convertToCm = (value) => useInches ? value * 2.54 : value;
+  const convertToCm = (value) => (useInches ? value * 2.54 : value);
 
   const handleSubmit = () => {
     const bodyType = getBodyType(
