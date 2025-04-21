@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base font and background settings */
+body {
+  @apply bg-gradient-to-b from-pink-50 to-white text-gray-800 antialiased font-sans;
+}
+
+/* Customize scrollbar (optional) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #f9a8d4; /* pink-300 */
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Optional: smooth transitions for elements */
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
