@@ -68,10 +68,12 @@ export default function BodyTypeGame() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4 text-center">You, Beautifully You 💖</h1>
+    <div className="max-w-md mx-auto p-6 font-sans bg-gradient-to-b from-pink-50 to-white rounded-xl shadow-md">
+      <h1 className="text-3xl font-bold mb-2 text-center text-pink-600 tracking-wide">
+        You, Beautifully You 💖
+      </h1>
 
-      <p className="text-center mb-6 text-base text-muted-foreground">
+      <p className="text-center mb-6 text-base text-gray-600">
         Every body is a good body. This space is made for you to feel confident,
         celebrated, and understood. Let's discover how unique and beautiful you
         already are – just as you are. 💕
@@ -82,43 +84,46 @@ export default function BodyTypeGame() {
         <Switch checked={useInches} onCheckedChange={setUseInches} />
       </div>
 
-      <Card className="mb-4">
+      <Card className="mb-6 bg-white rounded-2xl shadow-lg border-2 border-pink-200">
         <CardContent className="space-y-4 pt-6">
           <Input
             type="number"
             placeholder={`Bust (in ${useInches ? "inches" : "cm"})`}
+            className="placeholder:text-pink-400 focus:border-pink-500"
             onChange={(e) => setBust(Number(e.target.value))}
           />
           <Input
             type="number"
             placeholder={`Waist (in ${useInches ? "inches" : "cm"})`}
+            className="placeholder:text-pink-400 focus:border-pink-500"
             onChange={(e) => setWaist(Number(e.target.value))}
           />
           <Input
             type="number"
             placeholder={`Hips (in ${useInches ? "inches" : "cm"})`}
+            className="placeholder:text-pink-400 focus:border-pink-500"
             onChange={(e) => setHips(Number(e.target.value))}
           />
-          <Button className="w-full" onClick={handleSubmit}>
+          <Button className="w-full bg-pink-500 hover:bg-pink-600 text-white transition">
             See Your Body Type
           </Button>
         </CardContent>
       </Card>
 
       {result && (
-        <Card>
-          <CardContent className="text-center pt-6">
+        <Card className="bg-gradient-to-br from-pink-100 to-white rounded-3xl shadow-lg">
+          <CardContent className="text-center p-6">
             <Image
               src={result.image}
               alt={`${result.name} avatar`}
               width={200}
               height={200}
-              className="mx-auto mb-4 rounded-xl shadow"
+              className="mx-auto mb-4 rounded-full shadow-md border border-pink-200"
             />
-            <div className="text-4xl mb-2">{result.shape}</div>
-            <div className="text-xl font-semibold">{result.name}</div>
-            <p className="text-base mt-2">{result.message}</p>
-            <p className="text-sm mt-4 text-muted-foreground italic">
+            <div className="text-5xl mb-2">{result.shape}</div>
+            <div className="text-2xl font-semibold text-pink-600">{result.name}</div>
+            <p className="text-base mt-2 text-gray-700">{result.message}</p>
+            <p className="text-sm mt-4 italic text-gray-500">
               Style Tip: {result.styleTips}
             </p>
           </CardContent>
